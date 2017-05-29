@@ -1,0 +1,5 @@
+App Structure
+
+<App /> =  <Nav/>
+Nav will have a container called NavContainer
+
