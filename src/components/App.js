@@ -8,12 +8,10 @@ class App extends Component {
     return (
       <div className = 'container-fluid app'>
       <Router>
-        <NavContainer />
+        
         <Switch>
           <Route exact path = "/" component = {PostsContainer} />
-          <Route path = "/feed" component = {PostsContainer} />
-          <Route path = "/post/:slug" component = {PostContainer} />
-          <Route path = "/@:username" component = {ProfilesContainer} />
+
           <Route render = {<div> Nothing </div>} />
         </Switch>
       </Router>
@@ -23,3 +21,7 @@ class App extends Component {
 }
 
 export default App;
+//<NavContainer />
+          // <Route path = "/feed" component = {PostsContainer} />
+          // <Route path = "/post/:slug" component = {PostContainer} />
+          // <Route path = "/@:username" component = {ProfilesContainer} />
