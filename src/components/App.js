@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import logo from '../logo.svg';
 import '../res/css/App.css';
+import PostsContainer from '../containers/PostsContainer'
 
 class App extends Component {
   render() {
     return (
       <div className = 'container-fluid app'>
-      <Router>
+        <Router>
         
         <Switch>
           <Route exact path = "/" component = {PostsContainer} />
 
-          <Route render = {<div> Nothing </div>} />
+          <Route render = {function() {
+            return (<div> Nothing </div>);}} />
         </Switch>
       </Router>
       </div>
@@ -21,6 +23,15 @@ class App extends Component {
 }
 
 export default App;
+
+      // <Router>
+        
+      //   <Switch>
+      //     <Route exact path = "/" component = {PostsContainer} />
+
+      //     <Route render = {<div> Nothing </div>} />
+      //   </Switch>
+      // </Router>
 //<NavContainer />
           // <Route path = "/feed" component = {PostsContainer} />
           // <Route path = "/post/:slug" component = {PostContainer} />

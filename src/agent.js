@@ -46,8 +46,8 @@ const omitSlug = post => Object.assign({}, post, { slug: undefined })
 
 
 const Posts = {
-  all: page =>
-    requests.get(`/posts?${limit(10, page)}`),
+  all: (page) =>
+    requests.get(`/posts`),//?${limit(10, page)},
   byAuthor: (author, page) =>
     requests.get(`/posts?author=${encode(author)}&${limit(5, page)}`),
   byTag: (tag, page) =>
@@ -69,7 +69,7 @@ const Posts = {
   create: post =>
     requests.post('/posts', { post }),
   liked: () =>
-    requests.get('/posts/liked?limit=10&offset=0');
+    requests.get('/posts/liked?limit=10&offset=0')
 };
 
 
@@ -82,9 +82,9 @@ const Profile = {
   unfollow: username =>
     requests.del(`/profiles/${username}/follow`), 
   following: (username) =>
-    requests.get(`/profiles/${username}/following`);
+    requests.get(`/profiles/${username}/following`),
   followers: (username) =>
-    requests.get(`/profiles/${username}/followers`);
+    requests.get(`/profiles/${username}/followers`)
 };  
 
 export default {

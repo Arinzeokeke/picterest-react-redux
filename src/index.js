@@ -1,17 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-import store from './store'
+import configureStore from './store'
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 //import 'bootstrap'
 import { Button } from 'react-bootstrap';
 
+// const defaultState = {
+// 	postsInfo: {
+// 		posts: [],
+// 		postsLoading: false,
+// 		postsError: false
+// 	}
+// }
+const store = configureStore();
+
 ReactDOM.render((<Provider store = {store}>
 	<App />
-	</Provider)
+	</Provider>)
 	, document.getElementById('root'));
 registerServiceWorker();
