@@ -14,13 +14,11 @@ export const POST_FETCH_DATA = 'POST_FETCH_DATA';
 
 
 
-
-
-
 //Auth
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const REGISTER = 'REGISTER';
+export const GET_TOKEN = 'GET_TOKEN';
 export const LOGIN_PAGE_UNLOADED = 'LOGIN_PAGE_UNLOADED';
 export const REGISTER_PAGE_UNLOADED = 'REGISTER_PAGE_UNLOADED';
 
