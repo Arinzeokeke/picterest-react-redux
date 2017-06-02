@@ -37,11 +37,13 @@ export function postsFetchData() {
         agent.Posts.all(0)
             .then((response) => {
                 dispatch(postsLoading(false));
-                return response;
+                var data = JSON.parse(response.text).posts
+                //console.log(response.body.posts);
+                dispatch(postsFetchDataSuccess(data))
+                console.log(data);
             })
-            .then((response) => response.body.posts)
-            .then((posts) => dispatch(postsFetchDataSuccess(posts)))
             .catch((err) => {
+                console.error(err);
 
                 dispatch(postsLoading(false));
                 dispatch(postsErrored(true))

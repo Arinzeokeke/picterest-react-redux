@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Button} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import PostRow from './PostRow'
 
 
 class PostsList extends React.Component{
-	componentDidMount() {
+	componentWillMount() {
         this.props.fetchData();
     }
     render() {
@@ -15,24 +15,24 @@ class PostsList extends React.Component{
         if (this.props.isLoading) {
             return <p>Loading…</p>;
         }
+
+        var out = [];
+        var posts = this.props.posts;
+        console.log(posts[2]);
+
+        while (posts.length > 0){
+            let cur = posts.splice(0, 4);
+            out.push(<PostRow posts = {cur} key = {cur[0].id} />);
+        }
+        //console.log(JSON.stringify(out[0]))
+
         
         return (
             <div>
-            <Button>Hello world</Button>
-
-
-            <ul>
-                {this.props.posts.map((item) => (
-                    <li key={item.id}>
-                        <p className = 'text-center'> Title: {item.title} </p>
-                        <p> URL: <a href = {item.slug}> {item.url} </a> </p>
-                        <p> Slug: {item.slug} </p>
-                        <Link to = {'/post?slug=' + item.slug}>
-                            {item.title} 
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+            
+               
+             {out}
+            
             </div>
         );
     }

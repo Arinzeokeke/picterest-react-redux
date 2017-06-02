@@ -4,7 +4,7 @@ import PostsList from '../components/posts/PostsList'
 
 
 const mapStateToProps = (state) => {
-	console.log(state)
+	//console.log(state.postsInfo.posts[2])
     return {
 
         posts: state.postsInfo.posts,
