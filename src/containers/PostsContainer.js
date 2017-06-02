@@ -7,9 +7,9 @@ const mapStateToProps = (state) => {
 	console.log(state)
     return {
 
-        posts: state.posts,
-        hasErrored: state.postsError,
-        isLoading: state.postsLoading
+        posts: state.postsInfo.posts,
+        hasErrored: state.postsInfo.postsError,
+        isLoading: state.postsInfo.postsLoading
     };
 };
 

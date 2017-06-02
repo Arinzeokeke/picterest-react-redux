@@ -39,7 +39,7 @@ export function postsFetchData() {
                 dispatch(postsLoading(false));
                 return response;
             })
-            .then((response) => response.posts)
+            .then((response) => response.body.posts)
             .then((posts) => dispatch(postsFetchDataSuccess(posts)))
             .catch((err) => {
 
@@ -72,21 +72,22 @@ export function postFetchDataSuccess(post) {
 }
 
 
-export function postFetchData() {
+export function postFetchData(slug) {
     return (dispatch) => {
-        // dispatch(postLoading(true));
+        dispatch(postLoading(true));
         // dispatch(postsFetchDataSuccess([{id:2, title:'lkl9'}]));
         // dispatch(postsLoading(false));
-        agent.Posts.get('hello-world')
+        agent.Posts.get(slug)
             .then((response) => {
-                if (!response.ok) {
-                    throw Error(response.statusText);
-                }
+                console.log(response)
                 dispatch(postLoading(false));
                 return response;
             })
-            .then((response) => response.json())
+            .then((response) => response.body.post)
             .then((post) => dispatch(postFetchDataSuccess(post)))
-            .catch(() => dispatch(postErrored(true)));
+            .catch((err) => {
+                dispatch(postErrored(true))
+                dispatch(postsLoading(false));
+            });
     };
 }

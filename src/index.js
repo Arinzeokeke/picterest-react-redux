@@ -7,7 +7,8 @@ import configureStore from './store'
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
-//import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'masonry-layout'
 import { Button } from 'react-bootstrap';
 
 // const defaultState = {

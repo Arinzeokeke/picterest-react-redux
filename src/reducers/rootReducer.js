@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
-import { posts, postsErrored, postsLoading } from './posts';
+import {  postsInfo, postsInfo} from './posts';
 export default combineReducers({
-    posts,
-    postsErrored,
-    postsLoading
+	postsInfo,
+    postInfo
 });

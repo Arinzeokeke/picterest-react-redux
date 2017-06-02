@@ -6,7 +6,7 @@ const superagent = superagentPromise(_superagent, global.Promise);
 const API_ROOT = 'https://picterest-api.herokuapp.com/api/v1';
 
 const encode = encodeURIComponent;
-const responseBody = res => res.body;
+const responseBody = res => res;//.body;
 
 let token = null;
 const tokenPlugin = req => {

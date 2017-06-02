@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import logo from '../logo.svg';
 import '../res/css/App.css';
 import PostsContainer from '../containers/PostsContainer'
+import PostContainer from '../containers/PostContainer'
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
         
         <Switch>
           <Route exact path = "/" component = {PostsContainer} />
+          <Route path = '/post' component = {PostContainer} />
 
           <Route render = {function() {
             return (<div> Nothing </div>);}} />

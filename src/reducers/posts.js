@@ -1,8 +1,11 @@
 import {POSTS_ARE_LOADING,
 POSTS_LOAD_ERROR,
-POSTS_FETCH_DATA_SUCCESS } from '../actions/actionTypes'
+POSTS_FETCH_DATA_SUCCESS,
+POST_IS_LOADING,
+POST_LOAD_ERROR,
+POST_FETCH_DATA_SUCCESS } from '../actions/actionTypes'
 
-export function postsErrored(state = false, action) {
+function postsErrored(state = false, action) {
     switch (action.type) {
         case POSTS_LOAD_ERROR:
             return action.postsError;
@@ -10,7 +13,7 @@ export function postsErrored(state = false, action) {
             return state;
     }
 }
-export function postsLoading(state = false, action) {
+function postsLoading(state = false, action) {
     switch (action.type) {
         case POSTS_ARE_LOADING:
             return action.postsLoading;
@@ -18,7 +21,7 @@ export function postsLoading(state = false, action) {
             return state;
     }
 }
-export function posts(state = [], action) {
+function posts(state = [], action) {
     switch (action.type) {
         case POSTS_FETCH_DATA_SUCCESS:
             return action.posts;
@@ -26,3 +29,16 @@ export function posts(state = [], action) {
             return state;
     }
 }
+
+export function postsInfo(state = {}, action){
+    return Object.assign({}, state, 
+        {
+            postsLoading: postsLoading(state.postsLoading, action),
+        posts: posts(state.posts, action),
+        postsError: postsErrored(state.postsError, action)
+
+        });
+}
+
+
+
