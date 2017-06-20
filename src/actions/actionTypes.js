@@ -15,10 +15,17 @@ export const POST_FETCH_DATA = 'POST_FETCH_DATA';
 
 
 //Auth
+
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const REGISTER = 'REGISTER';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const GET_TOKEN = 'GET_TOKEN';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const SET_TOKEN = 'SET_TOKEN';
+export const REGISTER_ERROR = 'REGISTER_ERROR'
 export const LOGIN_PAGE_UNLOADED = 'LOGIN_PAGE_UNLOADED';
 export const REGISTER_PAGE_UNLOADED = 'REGISTER_PAGE_UNLOADED';
 
