@@ -6,8 +6,8 @@ import {
 const localStorageMiddleware = store => next => action => {
   if (action.type === SET_TOKEN) {
     if (!action.error) {
-      window.localStorage.setItem('jwt', action.payload.auth.token);
-      agent.setToken(action.payload.auth.token);
+      window.localStorage.setItem('jwt', action.token);
+      agent.setToken(action.token);
     }
   } else if (action.type === LOGOUT) {
     window.localStorage.setItem('jwt', '');
