@@ -1,22 +1,6 @@
 import agent from './agent';
-import {
-  GET_TOKEN, GET_CURRENT_USER
-} from './actions/actionTypes';
-
-const localStorageMiddleware = store => next => action => {
-  if (action.type === SET_TOKEN) {
-    if (!action.error) {
-      window.localStorage.setItem('jwt', action.token);
-      agent.setToken(action.token);
-    }
-  } else if (actiimport agent from './agent';
-import {
-  ASYNC_START,
-  ASYNC_END,
-  LOGIN,
-  LOGOUT,
-  REGISTER
-} from './constants/actionTypes';
+import { Types } from './actions/actions';
+const { ASYNC_START, REGISTER, LOGIN, LOGOUT } = Types;
 
 const promiseMiddleware = store => next => action => {
   if (isPromise(action.payload)) {
@@ -78,12 +62,3 @@ function isPromise(v) {
 
 
 export { promiseMiddleware, localStorageMiddleware }
-on.type === LOGOUT) {
-    window.localStorage.setItem('jwt', '');
-    agent.setToken(null);
-  }
-
-  next(action);
-};
-
-export { localStorageMiddleware }

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Nav from './navbar/Nav'
-import  RoutesMap from './routes'
+import Header from './navbar/Nav';
+import  RoutesMap from './routes';
 import '../res/css/App.css';
-import { Creators } from '../actions.actions';
+import { Creators } from '../actions/actions';
+import agent from '../agent';
 
 
 
@@ -17,9 +18,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLoad: (payload, token) =>
-    dispatch(Creators.appLoad(payload, token, true));
+    dispatch(Creators.appLoad(payload, token, true)),
   onRedirect: () =>
-    dispatch(Creators.redirect());
+    dispatch(Creators.redirect())
 });
 
 class App extends Component {
@@ -45,7 +46,9 @@ class App extends Component {
     if (appLoaded) {
       return (
         <div className='container-fluid app'>
-          <Header />
+          <Header 
+          appName={appName}
+          currentUser={currentUser}/>
           <RoutesMap />
         </div>
         )

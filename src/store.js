@@ -5,7 +5,7 @@ import { createLogger } from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { promiseMiddleware, localStorageMiddleware } from './middleware';
 import rootReducer from './reducers/rootReducer';
-import mySaga from './saga.js';
+import mySaga from './sagas.js';
 
 
 const sagaMiddleware = createSagaMiddleware();

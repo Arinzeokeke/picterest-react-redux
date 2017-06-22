@@ -21,11 +21,11 @@ const {
 
 const defaultState = {
   appName: 'Picterest',
-  toen: null,
+  token: null,
   viewChangeCounter: 0
 };
 
-export default (state = {}, action) => {
+export default (state = defaultState, action) => {
 	switch (action.type) {
     case APP_LOAD:
       return {
@@ -55,6 +55,14 @@ export default (state = {}, action) => {
         ...state,
         redirectTo: action.error ? null : '/',
         currentUser: action.error ? null : { ...action.payload.user, token: state.currentUser.token }
+      };
+    case LOGIN:
+    case REGISTER:
+      return {
+        ...state,
+        redirectTo: action.error ? null : '/',
+        token: action.error ? null : action.payload.user.token,
+        currentUser: action.error ? null : action.payload.user
       };
     case DELETE_POST:
       return {

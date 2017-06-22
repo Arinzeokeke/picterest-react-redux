@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-
-import common from './reducers/common';
-import editor from './reducers/editor';
-import home from './reducers/home';
-import profile from './reducers/profile';
-import settings from './reducers/settings';
-import article from './reducers/article';
-import articleList from './reducers/articleList';
+import auth from './auth';
+import common from './common';
+import editor from './editor';
+import home from './home';
+import profile from './profile';
+import settings from './settings';
+import post from './post';
+import postList from './postlist';
 
 export default combineReducers({
     auth,
