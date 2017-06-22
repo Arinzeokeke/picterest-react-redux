@@ -4,7 +4,9 @@ import agent from './agent.js'
 
 
 function* requestLogin(action) {
+  yield put(Creators.asyncStart(Types.LOGIN));
   const { email, password } = action.payload;
+  //console.log('mmmmmmmm');
 
   try {
 
@@ -88,10 +90,10 @@ function* requestRegister(action) {
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
   Allows concurrent fetches of user.
 */
-//console.log(Types);
+console.log(Types);
 function* mySaga() {
-  yield takeEvery(Types.requestLogin, requestLogin);
-  yield takeEvery(Types.requestRegister, requestRegister);
+  yield takeEvery(Types.REQUEST_LOGIN, requestLogin);
+  yield takeEvery(Types.REQUEST_REGISTER, requestRegister);
 }
 
 export default mySaga;

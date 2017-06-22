@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Navbar, 
   Nav, 
   NavItem, 
@@ -8,8 +9,12 @@ import { Navbar,
 const LoggedOutView = props => {
   return (
   <Nav pullRight>
-    <NavItem eventKey={1} href="#">Login</NavItem>
-    <NavItem eventKey={2} href="#">Register</NavItem>
+    <NavItem eventKey={1} > 
+      Link to='/login' />
+    </NavItem>
+    <NavItem eventKey={2} href="#">
+    Register
+    </NavItem>
   </Nav>
     );
 

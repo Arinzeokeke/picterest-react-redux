@@ -2,10 +2,10 @@
 // import PostContainer from '../containers/PostContainer'
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom'
 import { Creators } from '../actions/actions';
 import Register from './Register.js';
-import Login from './Login.js';
+import Login from './Login';
 
 const mapStateToProps = state => ({
   redirectTo: state.common.redirectTo
@@ -33,10 +33,10 @@ class RoutesMap extends Component {
           { redirect }
           <Route exact path = "/" render = {function() {
             return (<div> Home </div>);}} />
-
+          <Route path = "/login" component={Login} />
           <Route render = {function() {
             return (<div> 
-              Nothing </div>);}} />
+              <Link to='/login'> Login </Link> </div>);}} />
         </Switch>
       </Router>
     );

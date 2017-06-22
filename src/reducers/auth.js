@@ -8,15 +8,19 @@ const {
   UPDATE_FIELD_AUTH
 } = Types;
 
+const defaultState = {
+  email: '',
+  password: ''
+}
 
-export default (state = {}, action) => {
+export default (state = defaultState, action) => {
 	switch (action.type) {
 		case LOGIN:
 		case REGISTER:
 			return {
 				...state,
 				inProgress: false,
-				errors: action.error ? action.payload.errors : null
+				errors: action.error ? action.payload.error : null
 			};
 		case LOGIN_PAGE_UNLOADED:
 		case REGISTER_PAGE_UNLOADED:
@@ -28,7 +32,6 @@ export default (state = {}, action) => {
 					inProgress: true
 				};
 			}
-			break;
 		case UPDATE_FIELD_AUTH:
 			return {
 			...state, [action.key]: action.value
