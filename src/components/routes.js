@@ -1,6 +1,7 @@
 // import PostsContainer from '../containers/PostsContainer'
 // import PostContainer from '../containers/PostContainer'
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { Creators } from '../actions/actions';
 import Register from './Register.js';
@@ -43,7 +44,7 @@ class RoutesMap extends Component {
 }
 
 
-export default RoutesMap;
+export default connect(mapStateToProps, mapDispatchToProps)(RoutesMap);
 
           // <Route path = "/login" component={Login} />
           // <Route path='/register' component={Register} />
