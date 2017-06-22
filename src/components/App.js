@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from './navbar/Nav';
@@ -12,24 +13,15 @@ import agent from '../agent';
 const mapStateToProps = state => ({
   appLoaded: state.common.appLoaded,
   appName: state.common.appName,
-  currentUser: state.common.currentUser,
-  redirectTo: state.common.redirectTo
+  currentUser: state.common.currentUser
 });
 
 const mapDispatchToProps = dispatch => ({
   onLoad: (payload, token) =>
-    dispatch(Creators.appLoad(payload, token, true)),
-  onRedirect: () =>
-    dispatch(Creators.redirect())
+    dispatch(Creators.appLoad(payload, token, true))
 });
 
 class App extends Component {
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.redirectTo) {
-      this.context.router.replace(nextProps.redirectTo);
-      this.props.onRedirect();
-    }
-  }
 
   componentWillMount() {
     const token = window.localStorage.getItem('jwt');
@@ -61,9 +53,9 @@ class App extends Component {
   }
 }
 
-App.contextTypes = {
-  router: PropTypes.object.isRequired
-};
+// App.contextTypes = {
+//   router: PropTypes.object.isRequired
+// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
