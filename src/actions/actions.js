@@ -8,28 +8,18 @@ POST_FETCH_DATA_SUCCESS } from './actionTypes'
 import agent from '../agent.js'
 
 export default const { Types, Creators } = createActions({
-  postsLoading: ['bool'],
-  postsLoadError: ['bool'],
-  postsFetchData: null,
-  postsFetchDataSuccess: ['posts'],
-  postLoading: ['bool'],
-  postLoadError: ['bool'],
-  postFetchDataSuccess: ['post'],
   appLoad: ['bool'],
-  registerSuccess: null,
-  registerError: ['status'], ['body'],
-  login: ['null'],
-  register: ['null'],
-  registerSuccess: ['null'],
-  registerError: ['status', 'body'];
-  loginSuccess: null,
-  loginError: ['status'], ['body'],
-  setCurrentUser: ['user'],
+  login: ['payload', 'error'],
+  register: ['payload', 'error'],
+  getTags: null,
   getCurrentUser: null,
+  updateUser: null,
+  updateUserError: ['status'], ['body'],
+  updateUserSuccess: null,
   setToken: []
   logout: null,
   custom: (a, b) => ({ type: 'CUSTOM', total: a + b })
-}, {}) 
+}, {});
 
 
 

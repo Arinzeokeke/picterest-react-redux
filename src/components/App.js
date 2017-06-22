@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import '../res/css/App.css';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Nav from './navbar/Nav'
-import {connect} from 'react-redux'
 import  RoutesMap from './routes'
+import '../res/css/App.css';
 
 
 

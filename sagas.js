@@ -4,31 +4,77 @@ import Api from '...';
 import agent from '../agent.js'
 
 
-function* login(action) {
-  const { email, password } = yield select((state) => ({
-    email: state.auth.email,
-    password: state.auth.password
-  }));
+function* requestLogin(action) {
+  const { email, password } = action.payload;
 
   try {
-    const response = yield call(agent.Auth.token, email, password);
-    yield put(Creators.setToken(response.body.auth.token));
-    yield put(Creators.getCurrentUser());
+
+    const tokenResponse = yield call(agent.Auth.token, email, password);
+    yield put(Creators.setToken(response.auth.token));
+    const userResponse = yield call(agent.Auth.current);
+    const res = { ...userResponse, token: tokenResponse.auth.token };
+    yield put(Creators.login(res));
 
   } catch (e) {
-    yield put(Creators.loginError(response.status, response.body));
+    yield put(Creators.login(e.response.body, true));
   }
 }
 
-export function* getCurrentUser() {
+function requestRegister(action) {
+  const { name, email, password } = action.payload;
+
+  try {
+
+    const res = yield call(agent.Auth.register, username, email, password);
+    const token = yield call(agent.Auth.token, email, password);
+    const output = { ...res.user, token: token.auth.token };
+    yield put(Creators.register(output));
+  } catch (e) {
+    yield put(Creators.register(e.response.body, true));
+  }
+} 
+
+export function* getCurrentUser(action) {
 
   try {
     const res = yield call(agent.Auth.current);
+    const token = yield select(state => {
+      state.common.token
+    });
+    const user = 
     yield put(Creators.setUser(res.user));
 
   } catch (e) {
   }
   yield put(Creators.appLoad(true));
+}
+
+export function* updateCurrentUser(action) {
+  const { user } = yield select(state => ({
+    user: state.auth.newUser
+  }));
+
+  try {
+    const res = yield call(agent.Auth.update, user);
+    yield put(Creators.setUser(res.body.user));
+    yield put(Creators.updateUserSuccess());
+
+  } catch (e) {
+    yield put(Creators.updateUserError(res.status, res.body));
+  }
+}
+
+export function* getTags(action) {
+
+
+  try {
+    const res = yield call(agent.Tag.all);
+    yield put(Creators.setTags(res.body.tags));
+    yield put(Creators.getTagsSuccess());
+
+  } catch (e) {
+    yield put(Creators.getTagsError(res.status, res.body));
+  }
 }
 
 
@@ -65,7 +111,7 @@ function* postsFetchData(action) {
   }
 }
 
-function* postFetchData() {
+function* postFetchData(action) {
   try {
     yield put(Creators.postLoading(true));
     const res = yield call(agent.Posts.get, action.slug); 
