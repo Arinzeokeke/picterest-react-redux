@@ -1,81 +1,41 @@
-import { SET_STATE, 
-	REGISTER_SUCCESS, 
-	REGISTER_ERROR, 
-	LOGIN_SUCCESS, 
-	LOGIN_ERROR } from '../actions/actionTypes'
+import { Types } from '../actions/actions';
+const {
+	LOGIN,
+  REGISTER,
+  LOGIN_PAGE_UNLOADED,
+  REGISTER_PAGE_UNLOADED,
+  ASYNC_START,
+  UPDATE_FIELD_AUTH
+} = Types;
 
 
-
-function setUser(state = {}, action) {
-	
-	switch (action.type){
-		case SET_USER: {
-			action.user;
-		}
-
+export default (state = {}, action) => {
+	switch (action.type) {
+		case LOGIN:
+		case REGISTER:
+			return {
+				...state,
+				inProgress: false,
+				errors: action.error ? action.payload.errors : null
+			};
+		case LOGIN_PAGE_UNLOADED:
+		case REGISTER_PAGE_UNLOADED:
+			return {};
+		case ASYNC_START:
+			if (action.subtype === LOGIN || action.subtype === REGISTER) {
+				return {
+					...state,
+					inProgress: true
+				};
+			}
+			break;
+		case UPDATE_FIELD_AUTH:
+			return {
+			...state, [action.key]: action.value
+			};
 		default:
 			return state;
-	}
-}
-
-var defaultState = {
-	registerError: false,
-	loginError: false,
-	registerSuccess: false,
-	loginSuccess: false
-}
-
-function resolveErrors(state = defaultState, action){
-
-	switch (action.type){
-		case REGISTER_ERROR:
-			return {
-				...state,
-				registerError: true
-
-			}
-		case LOGIN_ERROR:
-			return {
-				...state,
-				loginError: true
-
-			}
-		case REGISTER_SUCCESS:
-			return {
-				...state,
-				registerSuccess: true
-
-			}
-		case LOGIN_SUCCESS:
-			return {
-				...state,
-				loginSuccess: true
-
-			}
-		default:
-			return state;
-	}
-}
 
 
-// function getRelations(state = {}, state) {
-
-// 	switch (action.type){
-// 		case SET_FOLLOWER:
-// 	}
-// }
-
-
-
-
-
-
-
-export function loggedInUser(state = {}, action){
-	return {
-		...state,
-
-		user: setUser(state.user, action),
-		errors: resolveErrors(state.errors, action)
 	}
 }

@@ -13,14 +13,14 @@ function* requestLogin(action) {
     yield put(Creators.setToken(response.auth.token));
     const userResponse = yield call(agent.Auth.current);
     const res = { ...userResponse, token: tokenResponse.auth.token };
-    yield put(Creators.login(res));
+    yield put(Creators.login(res, false));
 
   } catch (e) {
     yield put(Creators.login(e.response.body, true));
   }
 }
 
-function requestRegister(action) {
+function* requestRegister(action) {
   const { name, email, password } = action.payload;
 
   try {
@@ -28,13 +28,13 @@ function requestRegister(action) {
     const res = yield call(agent.Auth.register, username, email, password);
     const token = yield call(agent.Auth.token, email, password);
     const output = { ...res.user, token: token.auth.token };
-    yield put(Creators.register(output));
+    yield put(Creators.register(output, false));
   } catch (e) {
     yield put(Creators.register(e.response.body, true));
   }
 } 
 
-export function* getCurrentUser(action) {
+export function* appLoad(action) {
 
   try {
     const res = yield call(agent.Auth.current);

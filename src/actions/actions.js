@@ -8,16 +8,28 @@ POST_FETCH_DATA_SUCCESS } from './actionTypes'
 import agent from '../agent.js'
 
 export default const { Types, Creators } = createActions({
-  appLoad: ['bool'],
+  requestAppLoad
+  appLoad: ['payload', 'token', 'skipTracking'],
+  redirect: null,
+  articleSubmitted: ['payload', 'error'],
+  settingsSaved: ['payload', 'error'],
+  deletePost: ['payload', 'error'],
+  postPageUnloaded: null,
+  editorPageUnloaded: null,
+  homePageUnloaded: null,
+  profilePageUnloaded: null,
+  profileFavoritesPageUnloaded: null,
+  settingsPageUnloaded: null,
+  loginPageUnloaded: null,
+  registerPageUnloaded: null,
   login: ['payload', 'error'],
   register: ['payload', 'error'],
-  getTags: null,
   getCurrentUser: null,
   updateUser: null,
-  updateUserError: ['status'], ['body'],
-  updateUserSuccess: null,
   setToken: []
   logout: null,
+  asyncStart: ['subtype'],
+  updateFieldAuth: ['key', 'value'],
   custom: (a, b) => ({ type: 'CUSTOM', total: a + b })
 }, {});
 

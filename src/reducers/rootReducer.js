@@ -1,9 +1,14 @@
 import { combineReducers } from 'redux';
-import {postsInfo} from './posts';
-import {postInfo} from './post';
-import {auth} from './auth';
+
+import common from './reducers/common';
+import editor from './reducers/editor';
+import home from './reducers/home';
+import profile from './reducers/profile';
+import settings from './reducers/settings';
+import article from './reducers/article';
+import articleList from './reducers/articleList';
+
 export default combineReducers({
-	postsInfo,
-    postInfo,
-    auth
+    auth,
+    common
 });
