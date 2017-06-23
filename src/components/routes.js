@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-ro
 import { Creators } from '../actions/actions';
 import Register from './Register.js';
 import Login from './Login';
+import App from './App';
 
 const mapStateToProps = state => ({
   redirectTo: state.common.redirectTo
@@ -27,10 +28,10 @@ class RoutesMap extends Component {
       redirect = <Redirect to = {this.props.redirectTo} />
     }
     return (
-        <Router>
-        
+     <Router>
+      <App>
         <Switch>
-          { redirect }
+        { redirect }
           <Route exact path = "/" render = {function() {
             return (<div> Home </div>);}} />
           <Route path = "/login" component={Login} />
@@ -39,7 +40,8 @@ class RoutesMap extends Component {
             return (<div> 
               <Link to='/login'> Login </Link> </div>);}} />
         </Switch>
-      </Router>
+      </App>
+     </Router>
     );
   }
 }

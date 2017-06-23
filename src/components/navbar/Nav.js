@@ -10,10 +10,11 @@ const LoggedOutView = props => {
   return (
   <Nav pullRight>
     <NavItem eventKey={1} > 
-      Link to='/login' />
+      <Link to='/login'> Login </Link>
     </NavItem>
-    <NavItem eventKey={2} href="#">
-    Register
+    <NavItem eventKey={2} >
+    <Link to='/register'> Register </Link>
+    
     </NavItem>
   </Nav>
     );

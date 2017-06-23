@@ -6,10 +6,8 @@ import agent from './agent.js'
 function* requestLogin(action) {
   yield put(Creators.asyncStart(Types.LOGIN));
   const { email, password } = action.payload;
-  //console.log('mmmmmmmm');
 
-  try {
-
+ try {
     const { jwt } = yield call(agent.Auth.token, email, password);
     yield call(agent.setToken, jwt);
     yield put(Creators.setToken(jwt));
@@ -20,7 +18,12 @@ function* requestLogin(action) {
 
   } catch (e) {
     console.log('ERROR', e);
-    yield put(Creators.login(e.response.body, true));
+    if (e.status == 404) {
+      yield put(Creators.login({errors: ['Invalid Username or Password' ]}, true));
+    }
+    else{
+      yield put(Creators.login({errors: "Something went wrong"}, true));
+    }
   }
 }
 

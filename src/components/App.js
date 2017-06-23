@@ -40,7 +40,7 @@ class App extends Component {
           <Header 
           appName={appName}
           currentUser={currentUser}/>
-          <RoutesMap />
+          { this.props.children }
         </div>
         )
     }
