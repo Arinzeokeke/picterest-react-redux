@@ -1,6 +1,6 @@
 import agent from './agent';
 import { Types } from './actions/actions';
-const { ASYNC_START, REGISTER, LOGIN, LOGOUT } = Types;
+const { ASYNC_START, REGISTER, LOGIN, LOGOUT, SET_TOKEN } = Types;
 
 const promiseMiddleware = store => next => action => {
   if (isPromise(action.payload)) {
@@ -43,10 +43,13 @@ const promiseMiddleware = store => next => action => {
 };
 
 const localStorageMiddleware = store => next => action => {
-  if (action.type === REGISTER || action.type === LOGIN) {
+  if (action.type === REGISTER || action.type === LOGIN || action.type === SET_TOKEN ) {
+    //console.log(action.type);
     if (!action.error) {
-      window.localStorage.setItem('jwt', action.payload.user.token);
-      agent.setToken(action.payload.user.token);
+      window.localStorage.setItem('jwt', action.token || action.payload.token);
+      agent.setToken(action.token || action.payload.token );
+      // console.log('action', action);
+      // console.log("HERE", window.localStorage.getItem('jwt'));
     }
   } else if (action.type === LOGOUT) {
     window.localStorage.setItem('jwt', '');

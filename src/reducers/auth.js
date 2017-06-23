@@ -10,7 +10,8 @@ const {
 
 const defaultState = {
   email: '',
-  password: ''
+  password: '',
+  name: ''
 }
 
 export default (state = defaultState, action) => {
@@ -20,7 +21,7 @@ export default (state = defaultState, action) => {
 			return {
 				...state,
 				inProgress: false,
-				errors: action.error ? action.payload.error : null
+				errors: action.error ? action.payload.errors : null
 			};
 		case LOGIN_PAGE_UNLOADED:
 		case REGISTER_PAGE_UNLOADED:

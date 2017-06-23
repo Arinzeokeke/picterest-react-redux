@@ -10,13 +10,16 @@ function* requestLogin(action) {
 
   try {
 
-    const tokenResponse = yield call(agent.Auth.token, email, password);
-    yield put(Creators.setToken(tokenResponse.auth.token));
+    const { jwt } = yield call(agent.Auth.token, email, password);
+    yield call(agent.setToken, jwt);
+    yield put(Creators.setToken(jwt));
     const userResponse = yield call(agent.Auth.current);
-    const res = { ...userResponse, token: tokenResponse.auth.token };
+    console.log('USER', userResponse);
+    const res = { ...userResponse, token: jwt };
     yield put(Creators.login(res, false));
 
   } catch (e) {
+    console.log('ERROR', e);
     yield put(Creators.login(e.response.body, true));
   }
 }
@@ -28,9 +31,10 @@ function* requestRegister(action) {
 
     const res = yield call(agent.Auth.register, name, email, password);
     const token = yield call(agent.Auth.token, email, password);
-    const output = { ...res.user, token: token.auth.token };
+    const output = { ...res.user, token: token.jwt };
     yield put(Creators.register(output, false));
   } catch (e) {
+    console.log('ERROR', e);
     yield put(Creators.register(e.response.body, true));
   }
 } 

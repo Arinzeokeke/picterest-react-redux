@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
 
 class RoutesMap extends Component {
   componentDidMount() {
-    if (this.props.redirectTo){
+    if (this.props.redirectTo != null){
       this.props.onRedirect();
     }
   }
@@ -34,6 +34,7 @@ class RoutesMap extends Component {
           <Route exact path = "/" render = {function() {
             return (<div> Home </div>);}} />
           <Route path = "/login" component={Login} />
+          <Route path='/register' component={Register} />
           <Route render = {function() {
             return (<div> 
               <Link to='/login'> Login </Link> </div>);}} />

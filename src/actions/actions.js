@@ -20,7 +20,7 @@ export const { Types, Creators } = createActions({
   register: ['payload', 'error'],
   getCurrentUser: null,
   updateUser: null,
-  setToken: [],
+  setToken: ['token'],
   logout: null,
   asyncStart: ['subtype'],
   asyncEnd: null,

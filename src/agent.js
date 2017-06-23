@@ -11,7 +11,11 @@ const responseBody = res => res.body;//.body;
 let token = null;
 const tokenPlugin = req => {
   if (token) {
+    console.log('in agent  ' + token);
     req.set('Authorization', `${token}`);
+  }
+  else{
+    console.log('no token');
   }
 }
 
@@ -30,7 +34,7 @@ const Auth = {
   current: () =>
     requests.get('/user'),
   token: (email, password) => 
-    requests.post('/token', { user: { email, password } }),
+    requests.post('/token', { "auth": { "email": email, "password": password } }),
   register: (name, email, password) =>
     requests.post('/user', { user: { name, email, password } }),
   update: user =>

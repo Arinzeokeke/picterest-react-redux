@@ -1,6 +1,6 @@
 import { Types } from '../actions/actions';
 const {
-    APP_LOAD,
+  APP_LOAD,
   REDIRECT,
   LOGOUT,
   POST_SUBMITTED,
@@ -15,6 +15,7 @@ const {
   PROFILE_FAVORITES_PAGE_UNLOADED,
   SETTINGS_PAGE_UNLOADED,
   LOGIN_PAGE_UNLOADED,
+  SET_TOKEN,
   REGISTER_PAGE_UNLOADED
 } = Types;
 
@@ -61,9 +62,14 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         redirectTo: action.error ? null : '/',
-        token: action.error ? null : action.payload.user.token,
+        token: action.error ? null : action.payload.token,
         currentUser: action.error ? null : action.payload.user
       };
+    case SET_TOKEN:
+      return {
+        ...state, 
+        token: action.token
+      }
     case DELETE_POST:
       return {
         ...state,
