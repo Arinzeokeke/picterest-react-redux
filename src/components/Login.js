@@ -96,4 +96,4 @@ class Login extends Component {
 }
 
 //export default Login;
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps, null, {pure: false})(Login);

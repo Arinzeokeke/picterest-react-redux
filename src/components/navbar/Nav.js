@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, 
   Nav, 
   NavItem, 
   NavDropdown, 
   MenuItem } from 'react-bootstrap';
+  import LoggedInView from './LoggedInView';
 
 const LoggedOutView = props => {
   return (
   <Nav pullRight>
+
     <NavItem eventKey={1} > 
       <Link to='/login'> Login </Link>
     </NavItem>
@@ -16,22 +18,16 @@ const LoggedOutView = props => {
     <Link to='/register'> Register </Link>
     
     </NavItem>
+    <NavItem eventKey={3} >
+    <Link to='/'> Home </Link>
+    
+    </NavItem>
   </Nav>
     );
 
 };
 
-const LoggedInView = props => {
-  return (
-  <Nav pullRight>
-    <NavItem eventKey={1} href="#">Create New Post</NavItem>
-    <NavItem eventKey={2} href="#">{props.currentUser.name}</NavItem>
-    <NavItem eventKey={3} href="#">Sign Out</NavItem>
 
-  </Nav>
-    );
-
-};
 const Header = ({appName, currentUser}) => {
     const navbarInstance = (
       <Navbar  collapseOnSelect>
