@@ -18,7 +18,7 @@ function* requestLogin(action) {
 
   } catch (e) {
     console.log('ERROR', e);
-    if (e.status == 404) {
+    if (e.status === 404) {
       yield put(Creators.login({errors: ['Invalid Username or Password' ]}, true));
     }
     else{

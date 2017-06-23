@@ -33,6 +33,7 @@ export default (state = defaultState, action) => {
 					inProgress: true
 				};
 			}
+      break;
 		case UPDATE_FIELD_AUTH:
 			return {
 			...state, [action.key]: action.value

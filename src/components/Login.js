@@ -64,7 +64,7 @@ class Login extends Component {
                       className="form-control form-control-lg"
                       type="email"
                       placeholder="Email"
-                      value={this.props.email}
+                      value={email}
                       onChange={this.changeEmail} />
                   </fieldset>
 

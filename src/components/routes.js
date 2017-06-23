@@ -32,13 +32,12 @@ class RoutesMap extends Component {
       <App>
         <Switch>
         { redirect }
-          <Route exact path = "/" render = {function() {
-            return (<div> Home </div>);}} />
+          <Route exact path = "/" component={Home} />
           <Route path = "/login" component={Login} />
           <Route path='/register' component={Register} />
           <Route render = {function() {
             return (<div> 
-              <Link to='/login'> Login </Link> </div>);}} />
+              J hus </div>);}} />
         </Switch>
       </App>
      </Router>

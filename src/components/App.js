@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import Header from './navbar/Nav';
-import  RoutesMap from './routes';
 import '../res/css/App.css';
 import { Creators } from '../actions/actions';
 import agent from '../agent';
