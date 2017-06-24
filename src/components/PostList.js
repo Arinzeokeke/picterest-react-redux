@@ -21,7 +21,7 @@ const PostList = props => {
   let count = 0;
   while (posts.length > 0) {
     count++;
-    rows.push(<PostRow key ={count} data={posts.splice(0, 3)} />);
+    rows.push(<PostRow key ={count} posts={posts.splice(0, 3)} />);
  }
   return (
     <div>

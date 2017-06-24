@@ -31,7 +31,7 @@ export const { Types, Creators } = createActions({
   postLiked: ['payload'],
   postUnliked: ['payload'],
   setPage: ['page', 'payload'],
-  changeTab: ['tab', 'pager', 'payload']
+  changeTab: ['tab', 'pager', 'payload'],
 
   custom: (a, b) => ({ type: 'CUSTOM', total: a + b })
 }, {});

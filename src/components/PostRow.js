@@ -8,8 +8,9 @@ const PostRow = props => {
       );
   });
   return (
-    <div class="flex-grid">
+    <div className="flex-grid">
       { boxes }
     </div>
     );
 };
+export default PostRow;
