@@ -85,7 +85,7 @@ const MainView = props => {
 
       <PostList
         pager={props.pager}
-        articles={props.posts}
+        posts={props.posts}
         loading={props.loading}
         articlesCount={props.postsCount}
         currentPage={props.currentPage} />
