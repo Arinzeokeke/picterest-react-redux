@@ -1,6 +1,7 @@
 import React from 'react';
 import PostBox from './PostBox';
-import GridPagination from './GridPagination';
+//import GridPagination from './GridPagination';
+import PostRow from './PostRow';
 
 const PostList = props => {
   if (!props.posts) {
@@ -27,13 +28,14 @@ const PostList = props => {
     <div>
       {rows}
 
-      <GridPagination
-        pager={props.pager}
-        postsCount={props.postsCount}
-        currentPage={props.currentPage}
-        />
+
       </div>
     );
 };
 
 export default PostList;
+      // <GridPagination
+      //   pager={props.pager}
+      //   postsCount={props.postsCount}
+      //   currentPage={props.currentPage}
+      //   />

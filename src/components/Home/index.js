@@ -10,7 +10,7 @@ const Promise = global.Promise;
 const mapDispatchToProps = dispatch => ({
   onClickTag: (tag, pager, payload) => dispatch(Creators.applyTagFilter(tag, pager, payload)),
   onLoad: (tab, pager, payload) => dispatch(Creators.homePageLoaded(tab, pager, payload)),
-  onUnload: () => dispatch(Creators,homePageUnloaded())
+  onUnload: () => dispatch(Creators.homePageUnloaded())
 });
 
 const mapStateToProps = state => ({
@@ -19,7 +19,7 @@ const mapStateToProps = state => ({
   token: state.common.token
 });
 
-const Home extends Component {
+class Home extends Component {
 
   componentWillMount() {
     const tab = this.props.token ?  'feed' : 'all';

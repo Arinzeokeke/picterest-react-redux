@@ -23,10 +23,10 @@ export default (state = {}, action) => {
               ...post,
               likes: action.payload.post.likes,
               liked: action.payload.post.liked
-            }
+            };
           }
           return post;
-        });
+        })
       };
     case SET_PAGE:
       return {

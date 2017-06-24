@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-router';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import agent from '../agent';
 import { Creators } from '../actions/actions';
 import HashTag from './HashTag';
@@ -13,7 +13,6 @@ const mapDispatchToProps = dispatch => ({
     Creators.postLiked(agent.Posts.like(slug))),
   unlike: slug => dispatch(
     Creators.postUnliked(agent.Posts.unlike(slug)))
-
 });
 
 const PostBox = props => {
@@ -46,16 +45,18 @@ const PostBox = props => {
       </div>
       <div className='post-details'>
         <p>{post.title}</p>
-        <p className='post-tags'>{
-          post.tagList.map(tag => {
+        <p className='post-tags'>
+        {
+          post.tags.map(tag => {
             return (
-              <div>
+              <div key={tag + 'div'}>
               <HashTag key={tag + 'postbox'} tag={tag} />
               ,
               </div>
-              )
-          });
-        }</p>
+              );
+          })
+        }
+        </p>
 
       </div>
 
@@ -72,4 +73,4 @@ const PostBox = props => {
     );
 };
 
-export default connect(() => {}, mapDispatchToProps)(PostBox);
+export default connect(null, mapDispatchToProps)(PostBox);

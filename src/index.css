@@ -3,3 +3,23 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.flex-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.box {
+  flex: 1;
+
+  border-style: solid;
+  border-color: black;
+  margin: 5px;
+  align-self: center;
+  padding: 16px;
+}
+
+@media (max-width: 400px) {
+  .flex-grid {
+    display: block;
+  }
+}

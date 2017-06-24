@@ -7,6 +7,7 @@ import { Creators } from '../actions/actions';
 import Register from './Register.js';
 import Login from './Login';
 import App from './App';
+import Home from './Home';
 
 const mapStateToProps = state => ({
   redirectTo: state.common.redirectTo
