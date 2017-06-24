@@ -1,4 +1,4 @@
-## picterext-react-redux
+## picterest-react-redux
 
 An Imageboard built with React consuming my Rails JSON API [picterest](https://github.com/Arinzeokeke/picterest) 
 
