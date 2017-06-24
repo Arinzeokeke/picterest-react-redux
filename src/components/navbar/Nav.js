@@ -33,7 +33,7 @@ const Header = ({appName, currentUser}) => {
       <Navbar  collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">React-Bootstrap</a>
+            <a href="#">{appName}</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
