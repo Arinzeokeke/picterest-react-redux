@@ -1,5 +1,3 @@
-// import PostsContainer from '../containers/PostsContainer'
-// import PostContainer from '../containers/PostContainer'
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom'
@@ -8,6 +6,7 @@ import Register from './Register.js';
 import Login from './Login';
 import App from './App';
 import Home from './Home';
+import Editor from './Editor';
 
 const mapStateToProps = state => ({
   redirectTo: state.common.redirectTo
@@ -37,6 +36,7 @@ class RoutesMap extends Component {
           <Route exact path = "/" component={Home} />
           <Route path = "/login" component={Login} />
           <Route path='/register' component={Register} />
+          <Route path='/editor/:slug' component={Editor} />
           <Route render = {function() {
             return (<div> 
               J hus </div>);}} />

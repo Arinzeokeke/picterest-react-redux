@@ -5,7 +5,7 @@ export const { Types, Creators } = createActions({
   requestRegister: ['payload'],
   appLoad: ['payload', 'token', 'skipTracking'],
   redirect: null,
-  articleSubmitted: ['payload', 'error'],
+  postSubmitted: ['payload', 'error'],
   settingsSaved: ['payload', 'error'],
   deletePost: ['payload', 'error'],
   postPageUnloaded: null,
@@ -32,6 +32,10 @@ export const { Types, Creators } = createActions({
   postUnliked: ['payload'],
   setPage: ['page', 'payload'],
   changeTab: ['tab', 'pager', 'payload'],
+  editorPageLoaded: ['payload'],
+  addTag: null,
+  removeTag: ['tag'],
+  updateFieldEditor: ['key', 'value']
 
   custom: (a, b) => ({ type: 'CUSTOM', total: a + b })
 }, {});
