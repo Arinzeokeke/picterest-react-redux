@@ -56,7 +56,6 @@ const TagFilterTab = props => {
 }
 
 const mapStateToProps = state => {
-  //console.log(state.postList);
   return {
     ...state.postList,
   tags: state.home.tags,

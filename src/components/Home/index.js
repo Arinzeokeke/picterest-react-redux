@@ -22,8 +22,8 @@ const mapStateToProps = state => ({
 class Home extends Component {
 
   componentWillMount() {
-    const tab = 'all'; //this.props.token ?  'feed' : 'all';
-    const postsPromise = agent.Posts.all; // this.props.token ? agent.Posts.feed : agent.Posts.all;
+    const tab = this.props.token ?  'feed' : 'all';
+    const postsPromise = this.props.token ? agent.Posts.feed : agent.Posts.all;
 
     this.props.onLoad(tab, postsPromise, Promise.all([agent.Tags.getAll(), postsPromise()]));
 

@@ -54,19 +54,19 @@ const omitSlug = post => Object.assign({}, post, { slug: undefined })
 
 const Posts = {
   all: (page) =>
-    requests.get(`/posts`),//?${limit(10, page)},
+    requests.get(`/posts?${limit(12, page)}`),
   byAuthor: (author, page) =>
     requests.get(`/posts?author=${encode(author)}&${limit(5, page)}`),
   byTag: (tag, page) =>
-    requests.get(`/posts?tag=${encode(tag)}&${limit(10, page)}`),
+    requests.get(`/posts?tag=${encode(tag)}&${limit(12, page)}`),
   del: slug =>
     requests.del(`/posts/${slug}`),
   like: slug =>
     requests.post(`/posts/${slug}/vote`),
   likedBy: (author, page) =>
     requests.get(`/posts?liked=${encode(author)}&${limit(5, page)}`),
-  feed: () =>
-    requests.get('/posts/feed?limit=10&offset=0'),
+  feed: (page) =>
+    requests.get(`/posts/feed?${limit(12, page)}`),
   get: slug =>
     requests.get(`/posts/${slug}`),
   unlike: slug =>
@@ -75,8 +75,8 @@ const Posts = {
     requests.put(`/posts/${post.slug}`, { post: omitSlug(post) }),
   create: post =>
     requests.post('/posts', { post }),
-  liked: () =>
-    requests.get('/posts/liked?limit=10&offset=0')
+  liked: (page) =>
+    requests.get(`/posts/liked?${limit(10, page)}`)
 };
 
 
