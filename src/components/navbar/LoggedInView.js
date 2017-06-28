@@ -34,4 +34,4 @@ class LoggedInView extends  Component {
   }
 }
 
-export default connect(() => {}, mapDispatchToProps, null, {pure: false})(LoggedInView);
+export default connect(null, mapDispatchToProps, null, {pure: false})(LoggedInView);

@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from 'redux';
+//import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
@@ -12,18 +12,20 @@ const sagaMiddleware = createSagaMiddleware();
 
 const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
-    return applyMiddleware(thunk, sagaMiddleware, promiseMiddleware, localStorageMiddleware);
+    return applyMiddleware(sagaMiddleware, promiseMiddleware, localStorageMiddleware);
   } else {
     // Enable additional logging in non-production environments.
-    return applyMiddleware(sagaMiddleware, thunk, promiseMiddleware, localStorageMiddleware, createLogger())
+    return applyMiddleware(sagaMiddleware, promiseMiddleware, localStorageMiddleware, createLogger())
   }
 }
 
 export default function configureStore(initialState) {
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || composeWithDevTools;
+
     const store = createStore(
         rootReducer,
         initialState,
-        composeWithDevTools(getMiddleware())
+        composeEnhancers(getMiddleware())
     );
     sagaMiddleware.run(mySaga);
     return store;

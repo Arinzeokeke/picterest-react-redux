@@ -3,10 +3,13 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'https://picterest-api.herokuapp.com/api/v1';
+//const API_ROOT = 'https://picterest-api.herokuapp.com/api/v1';
+const API_ROOT = 'http://localhost:4000/api/v1';
 
 const encode = encodeURIComponent;
-const responseBody = res => res.body;//.body;
+const responseBody = res => {
+  return res.body;//parse(res.text);
+}//.body;
 
 let token = null;
 const tokenPlugin = req => {

@@ -17,7 +17,7 @@ const PostList = props => {
       </div> 
     );
   }
-  let posts = props.posts;
+  let posts = props.posts.slice();
   let rows = [];
   let count = 0;
   while (posts.length > 0) {
@@ -28,14 +28,13 @@ const PostList = props => {
     <div>
       {rows}
 
-
+      <GridPagination
+        pager={props.pager}
+        postsCount={props.postsCount}
+        currentPage={props.currentPage}
+      />
       </div>
     );
 };
 
 export default PostList;
-      // <GridPagination
-      //   pager={props.pager}
-      //   postsCount={props.postsCount}
-      //   currentPage={props.currentPage}
-      //   />

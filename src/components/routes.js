@@ -33,6 +33,7 @@ class RoutesMap extends Component {
       <App>
         <Switch>
         { redirect }
+        
           <Route exact path = "/" component={Home} />
           <Route path = "/login" component={Login} />
           <Route path='/register' component={Register} />

@@ -4,7 +4,7 @@ import PostBox from './PostBox';
 const PostRow = props => {
   const boxes = props.posts.map(post => {
     return (
-        <PostBox post={post} key={post.slug} />
+        <PostBox post={post} key={post.id} />
       );
   });
   return (

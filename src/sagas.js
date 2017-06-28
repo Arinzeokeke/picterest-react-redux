@@ -58,46 +58,6 @@ function* requestRegister(action) {
 //   }
 // }
 
-// export function* getTags(action) {
-
-
-//   try {
-//     const res = yield call(agent.Tag.all);
-//     yield put(Creators.setTags(res.body.tags));
-//     yield put(Creators.getTagsSuccess());
-
-//   } catch (e) {
-//     yield put(Creators.getTagsError(res.status, res.body));
-//   }
-// }
-
-
-
-// function* register(action) {
-//   const { username, password, email } = yield select(state => ({
-//     username: state.auth.username,
-//     password: state.auth.password,
-//     email: state.auth.email
-//   }));
-
-//   try {
-//     const res = yield call(agent.Auth.register, username, email, password);
-//     yield put(Creators.login());
-//     yield put(Creators.registerSuccess());
-
-//   } catch (e) {
-//     yield put(Creators.registerError(res.status, res.body));
-//   }
-// }
-
-
-
-
-/*
-  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
-  Allows concurrent fetches of user.
-*/
-console.log(Types);
 function* mySaga() {
   yield takeEvery(Types.REQUEST_LOGIN, requestLogin);
   yield takeEvery(Types.REQUEST_REGISTER, requestRegister);

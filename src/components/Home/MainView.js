@@ -55,17 +55,21 @@ const TagFilterTab = props => {
   return null;
 }
 
-const mapStateToProps = state => ({
-  ...state.postList,
+const mapStateToProps = state => {
+  //console.log(state.postList);
+  return {
+    ...state.postList,
   tags: state.home.tags,
   token: state.common.token
-});
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   onTabClick: (tab, pager, payload) => dispatch(Creators.changeTab(tab, pager, payload))
 });
 
 const MainView = props => {
+  //console.log(props.posts);
   return (
     <div className="col-md-9">
       <div className="feed-toggle">
@@ -87,7 +91,7 @@ const MainView = props => {
         pager={props.pager}
         posts={props.posts}
         loading={props.loading}
-        articlesCount={props.postsCount}
+        postsCount={props.postsCount}
         currentPage={props.currentPage} />
     </div>
   );

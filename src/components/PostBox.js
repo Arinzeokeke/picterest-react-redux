@@ -17,14 +17,15 @@ const mapDispatchToProps = dispatch => ({
 
 const PostBox = props => {
   const post = props.post;
+  //console.log(post);
   const likeClass = post.liked ? LIKED_CLASS : NOT_LIKED_CLASS;
 
   const handleClick = ev => {
     ev.preventDefault();
     if (post.liked){
-      props.unfavorite(post.slug);
+      props.unlike(post.slug);
     } else {
-      props.favorite(post.slug);
+      props.like(post.slug);
     }
   };
 

@@ -11,14 +11,16 @@ const {
   PROFILE_PAGE_UNLOADED
 } = Types;
 
+
 export default (state = {}, action) => {
   switch (action.type) {
     case POST_LIKED:
     case POST_UNLIKED:
       return {
         ...state,
-        posts: state.posts.map( post => {
-          if (post.id === action.payload.post.slug) {
+        posts: action.error ? state.posts : state.posts.map(post => {
+
+          if (post.slug === action.payload.post.slug) {
             return {
               ...post,
               likes: action.payload.post.likes,
@@ -58,15 +60,15 @@ export default (state = {}, action) => {
         tab: action.tab
       }
     case CHANGE_TAB:
-    return {
-      ...state,
-      pager: action.pager,
-      posts: action.payload.posts,
-      postsCount: action.payload.count,
-      tab: action.tab,
-      currentPage: 0,
-      tag: null
-    }
+     return {
+          ...state,
+          pager: action.pager,
+          posts: action.payload.posts,
+          postsCount: action.payload.count,
+          tab: action.tab,
+          currentPage: 0,
+          tag: null
+        }
 
     case PROFILE_PAGE_LOADED:
       return {

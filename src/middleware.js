@@ -16,8 +16,8 @@ const promiseMiddleware = store => next => action => {
         if (!skipTracking && currentState.viewChangeCounter !== currentView) {
           return
         }
-        console.log('RESULT', res);
         action.payload = res;
+        console.log('RESULT', res);
         //store.dispatch({ type: ASYNC_END, promise: action.payload });
         store.dispatch(action);
       },
