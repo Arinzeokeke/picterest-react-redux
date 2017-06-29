@@ -31,7 +31,7 @@ export default (state = defaultState, action) => {
     case APP_LOAD:
       return {
         ...state,
-        token: action.token || null,
+        token: action.error ? null : action.token || null,
         appLoaded: true,
         currentUser: action.payload ? { ...action.payload.user, token: action.token } : null 
       };

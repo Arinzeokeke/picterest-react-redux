@@ -1,6 +1,6 @@
 import agent from './agent';
 import { Types } from './actions/actions';
-const { ASYNC_START, REGISTER, LOGIN, LOGOUT, SET_TOKEN } = Types;
+const { ASYNC_START, REGISTER, LOGIN, LOGOUT, SET_TOKEN, APP_LOAD } = Types;
 
 const promiseMiddleware = store => next => action => {
   if (isPromise(action.payload)) {
@@ -22,15 +22,19 @@ const promiseMiddleware = store => next => action => {
         store.dispatch(action);
       },
       error => {
-        const currentState = store.getState()
+        const currentState = store.getState();
         if (!skipTracking && currentState.viewChangeCounter !== currentView) {
           return
         }
         console.log('ERROR', error);
         action.error = true;
         action.payload = error.response.body;
+
         if (!action.skipTracking) {
           //store.dispatch({ type: ASYNC_END, promise: action.payload });
+        }
+        if (action.type === APP_LOAD) {
+          window.localStorage.setItem('jwt', '');
         }
         store.dispatch(action);
       }

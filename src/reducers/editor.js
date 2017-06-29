@@ -10,8 +10,10 @@ const {
   UPDATE_FIELD_EDITOR
   } 
   = Types; 
-
-export default (state = {}, action) => {
+const defaultState = {
+  tags: []
+};
+export default (state = defaultState, action) => {
   switch (action.type) {
     case EDITOR_PAGE_LOADED:
       return{
@@ -20,7 +22,8 @@ export default (state = {}, action) => {
         title: action.payload ? action.payload.post.title : '',
         url: action.payload ? action.payload.post.url : '',
         tagInput: '',
-        tags: action.payload ? action.payload.post.tags : []
+        tags: action.payload ? action.payload.post.tags : [],
+        postAuthor: action.payload ? action.payload.post.author : null
       }
 
     case POST_SUBMITTED:
@@ -42,12 +45,12 @@ export default (state = {}, action) => {
         ...state,
         tags: state.tags.concat([state.tagInput]),
         tagInput: ''
-      }
+      };
 
     case REMOVE_TAG:
     return {
       ...state,
-      tags: state.tags.filter(tag => tag != action.tag)
+      tags: state.tags.filter(tag => tag !== action.tag)
     };
 
     case UPDATE_FIELD_EDITOR:

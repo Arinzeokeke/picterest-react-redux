@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {  
   Nav, 
   NavItem } from 'react-bootstrap';
@@ -24,7 +25,11 @@ class LoggedInView extends  Component {
   render() {
     return (
     <Nav pullRight>
-      <NavItem eventKey={1} href="#">Create New Post</NavItem>
+      <NavItem eventKey={1} href="#">
+      <Link to='/editor'> 
+      Create New Post 
+      </Link>
+      </NavItem>
       <NavItem eventKey={2} href="#">@{this.props.currentUser.name}</NavItem>
       <NavItem eventKey={3} href="#" onClick={this.handleClick}> logout
       </NavItem>

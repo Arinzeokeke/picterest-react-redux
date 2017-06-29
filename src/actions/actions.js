@@ -35,7 +35,7 @@ export const { Types, Creators } = createActions({
   editorPageLoaded: ['payload'],
   addTag: null,
   removeTag: ['tag'],
-  updateFieldEditor: ['key', 'value']
+  updateFieldEditor: ['key', 'value'],
 
   custom: (a, b) => ({ type: 'CUSTOM', total: a + b })
 }, {});

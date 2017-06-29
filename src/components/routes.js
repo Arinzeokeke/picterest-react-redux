@@ -36,6 +36,7 @@ class RoutesMap extends Component {
           <Route exact path = "/" component={Home} />
           <Route path = "/login" component={Login} />
           <Route path='/register' component={Register} />
+          <Route exact path='/editor' component={Editor} />
           <Route path='/editor/:slug' component={Editor} />
           <Route render = {function() {
             return (<div> 

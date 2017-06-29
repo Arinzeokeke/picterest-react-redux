@@ -1,5 +1,4 @@
 import React from 'react';
-import PostBox from './PostBox';
 import GridPagination from './GridPagination';
 import PostRow from './PostRow';
 
