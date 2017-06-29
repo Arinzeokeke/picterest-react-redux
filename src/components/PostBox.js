@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import agent from '../agent';
 import { Creators } from '../actions/actions';
 import HashTag from './HashTag';
+import PostActions from './Post/PostActions';
 
 const LIKED_CLASS = 'btn btn-sm btn-primary';
 const NOT_LIKED_CLASS = 'btn btn-sm btn-outline-primary';
@@ -66,9 +67,13 @@ const PostBox = props => {
             <i className="ion-heart"></i> {post.likes}
           </button>
 
-          <Link to={`post/${post.slug}`} className='btn btn-md btn-success'>
-          View
+          { props.canEdit ? <PostActions post={post} /> : null }
+
+          { props.indexElem ? 
+            <Link to={`post/${post.slug}`} className='btn btn-md btn-success'>
+            View
           </Link>
+          : null }
         </div>
     </div>
     );

@@ -7,6 +7,7 @@ import Login from './Login';
 import App from './App';
 import Home from './Home';
 import Editor from './Editor';
+import Post from './Post/index';
 
 const mapStateToProps = state => ({
   redirectTo: state.common.redirectTo
@@ -34,6 +35,8 @@ class RoutesMap extends Component {
         { redirect }
         
           <Route exact path = "/" component={Home} />
+
+          <Route path='/post/:slug' component={Post} />
           <Route path = "/login" component={Login} />
           <Route path='/register' component={Register} />
           <Route exact path='/editor' component={Editor} />

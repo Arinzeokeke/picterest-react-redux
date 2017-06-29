@@ -18,7 +18,7 @@ export default (state = {}, action) => {
     case POST_UNLIKED:
       return {
         ...state,
-        posts: action.error ? state.posts : state.posts.map(post => {
+        posts: state.posts ? (action.error ? state.posts : state.posts.map(post => {
 
           if (post.slug === action.payload.post.slug) {
             return {
@@ -28,7 +28,7 @@ export default (state = {}, action) => {
             };
           }
           return post;
-        })
+        })) : state.posts
       };
     case SET_PAGE:
       return {
