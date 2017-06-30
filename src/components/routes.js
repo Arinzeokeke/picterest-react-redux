@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom';
+import firebase from 'firebase';
 import { Creators } from '../actions/actions';
 import Register from './Register.js';
 import Login from './Login';
@@ -21,6 +22,19 @@ class RoutesMap extends Component {
   componentDidMount() {
     if (this.props.redirectTo != null){
       this.props.onRedirect();
+    }
+
+    componentWillMount() {
+        // Initialize Firebase
+      let config = {
+        apiKey: "AIzaSyBZkgZKVc0SFUyNvJ62VBvvUcJ-ti_Gyks",
+        authDomain: "picterest-44fd5.firebaseapp.com",
+        databaseURL: "https://picterest-44fd5.firebaseio.com",
+        projectId: "picterest-44fd5",
+        storageBucket: "gs://picterest-44fd5.appspot.com",
+        messagingSenderId: "391756120477"
+      };
+      firebase.initializeApp(config);
     }
   }
   render() {
