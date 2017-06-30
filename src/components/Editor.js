@@ -1,9 +1,12 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import firebase from 'firebase';
+import randomString from 'randomstring';
 import agent from '../agent';
 import { Creators } from '../actions/actions';
 import DisplayForm from './DisplayForm';
+
 
 const mapStateToProps = state => ({
   ...state.editor,
@@ -16,7 +19,9 @@ const mapDispatchToProps = dispatch => ({
   onRemoveTag: tag => dispatch(Creators.removeTag(tag)),
   onSubmit: payload => dispatch(Creators.postSubmitted(payload)),
   onUnload: () => dispatch(Creators.editorPageUnloaded()),
-  onUpdateField: (key, value) => dispatch(Creators.updateFieldEditor(key, value)) 
+  onUpdateField: (key, value) => dispatch(Creators.updateFieldEditor(key, value)),
+  onUpdateFile: (file) => dispatch(Creators.updateFileEditor(file)),
+  onFileUpload: (link) => dispatch(Creators.fileUploaded(link, 'editor'))
 });
 
 const UserLoggedOut = props => {
@@ -50,6 +55,12 @@ class Editor extends Component {
     this.changeUrl = updateFieldEvent('url');
     this.changeTagInput = updateFieldEvent('tagInput');
 
+    this.handleFileChange = (ev) => {
+    //console.log(ev.target.files);
+     const file = ev.target.files[0];
+     this.props.onUpdateFile(file);
+    };
+
     this.watchForEnter = ev => {
       if (ev.keyCode === 13) {
         ev.preventDefault();
@@ -61,21 +72,52 @@ class Editor extends Component {
       this.props.onRemoveTag(tag);
     };
 
+    this.decideUrl = () => {
+      if (this.props.file && !this.props.errors) {
+        const randString = randomString.generate();
+        console.log(randString);
+        const metadata = {
+          contentType: this.props.file.type
+        };
+        const storageRef = firebase.storage().ref().child(`posts/${randString}`)
+        .put(this.props.file, metadata)
+          .then(snapshot => {
+            const link = snapshot.downloadURL;
+            this.props.onFileUpload(link);
+            return link;
+
+          })
+          .catch(e => {
+            const payload = { errors: ['Something went wrong with the file upload']};
+            this.props.onSubmit(payload);
+            return false;
+        });
+
+      }
+      else {
+        return this.props.url
+      }
+
+    };
+
     this.submitForm = ev => {
       ev.preventDefault();
-      const post = {
-        title: this.props.title,
-        url: this.props.url,
-        tagList: this.props.tags
-      };
+      const url = this.decideUrl();
+      if (url) {
+        const post = {
+          title: this.props.title,
+          url: url,
+          tagList: this.props.tags
+        };
 
-      const slug = { slug: this.props.postSlug };
-      const promise = this.props.postSlug ?
-        agent.Posts.update(Object.assign(post, slug)) 
-        :
-        agent.Posts.create(post);
-      this.props.onSubmit(promise);
-    };
+        const slug = { slug: this.props.postSlug };
+        const promise = this.props.postSlug ?
+          agent.Posts.update(Object.assign(post, slug)) 
+          :
+          agent.Posts.create(post);
+        this.props.onSubmit(promise);
+      };
+    }
   }
 
   componentWillMount() {
@@ -130,6 +172,7 @@ class Editor extends Component {
           inProgress = {this.props.inProgress}
           submitForm = {this.submitForm}
           removeTagHandler = {this.removeTagHandler}
+          handleFileChange= {this.handleFileChange}
           />
           );
       }
@@ -137,7 +180,6 @@ class Editor extends Component {
    };
 
    const output  = outputDecider();
-   console.log(output);
 
     // }
     return (

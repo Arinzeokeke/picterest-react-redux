@@ -12,6 +12,8 @@ const mapDispatchToProps = dispatch => ({
   onChangeEmail: value => dispatch(Creators.updateFieldAuth('email', value)),
   onChangePassword: value => dispatch(Creators.updateFieldAuth('password', value)),
   onChangeName: value => dispatch(Creators.updateFieldAuth('name', value)),
+  onChangeUrl: value => dispatch(Creators.updateFieldAuth('url', value)),
+  onUpdateFile: (file) => dispatch(Creators.updateFileAuth(file)),
   onSubmit: (name, email, password) => dispatch(Creators.requestRegister({name, email, password})),
   onUnload: () => dispatch(Creators.registerPageUnloaded())
 });
@@ -21,7 +23,12 @@ class Register extends Component {
     super();
     this.changeEmail = e => this.props.onChangeEmail(e.target.value);
     this.changeName = ev => this.props.onChangeName(ev.target.value);
+    this.changeUrl = ev => this.props.onChangeUrl(ev.target.value);
     this.changePassword = e => this.props.onChangePassword(e.target.value);
+    this.handleFileChange = (ev) => {
+     const file = ev.target.files[0];
+     this.props.onUpdateFile(file);
+    };
     this.submitForm = (name, email, password) => ev => {
       ev.preventDefault();
       this.props.onSubmit(name, email, password);
@@ -76,6 +83,13 @@ class Register extends Component {
                       placeholder="Email"
                       value={this.props.email}
                       onChange={this.changeEmail} />
+                  </fieldset>
+
+                  <fieldset className="form-group">
+                    <input 
+                    className="form-control"
+                    type="file" 
+                    onChange={this.handleFileChange} />
                   </fieldset>
 
                   <fieldset className="form-group">

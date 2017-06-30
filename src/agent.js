@@ -38,8 +38,8 @@ const Auth = {
     requests.get('/user'),
   token: (email, password) => 
     requests.post('/token', { "auth": { "email": email, "password": password } }),
-  register: (name, email, password) =>
-    requests.post('/user', { user: { name, email, password } }),
+  register: (name, email, password, url) =>
+    requests.post('/user', { user: { name, email, password, url } }),
   update: user =>
     requests.put('/user', { user })
 };

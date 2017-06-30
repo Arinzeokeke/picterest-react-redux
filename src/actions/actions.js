@@ -37,6 +37,9 @@ export const { Types, Creators } = createActions({
   removeTag: ['tag'],
   updateFieldEditor: ['key', 'value'],
   postPageLoaded: ['payload'],
+  updateFileEditor: ['file'],
+  updateFileAuth: ['file'],
+  fileUploaded: ['link', 'subtype'],
 
   custom: (a, b) => ({ type: 'CUSTOM', total: a + b })
 }, {});

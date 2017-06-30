@@ -15,7 +15,6 @@ const DisplayForm =  props =>  {
           );
       });
 
-    console.log(props);
       return (
       <div>
           <div>
@@ -40,6 +39,13 @@ const DisplayForm =  props =>  {
                 placeholder="Image Link"
                 value={props.url}
                 onChange={props.changeUrl} />
+            </fieldset>
+
+            <fieldset className="form-group">
+            <input 
+            className="form-control"
+            type="file" 
+            onChange={props.handleFileChange} />
             </fieldset>
 
             <fieldset className="form-group">

@@ -3,11 +3,13 @@ import { Types } from '../actions/actions';
 const { 
   EDITOR_PAGE_LOADED,
   EDITOR_PAGE_UNLOADED,
+  FILE_UPLOADED,
   POST_SUBMITTED,
   ASYNC_START,
   ADD_TAG,
   REMOVE_TAG,
-  UPDATE_FIELD_EDITOR
+  UPDATE_FIELD_EDITOR,
+  UPDATE_FILE_EDITOR
   } 
   = Types; 
 const defaultState = {
@@ -57,6 +59,28 @@ export default (state = defaultState, action) => {
     return {
       ...state, [action.key]: action.value
     };
+
+    case UPDATE_FILE_EDITOR: {
+      const isImage = action.file.type.slice(0, 5) === 'image';
+
+      return {
+        ...state,
+        errors: isImage ? null : 
+          (state.errors || []).concat(["Upload must be an image"]),
+        file: action.file,
+        inProgress: isImage ? false : true
+      };
+    }
+
+    case FILE_UPLOADED:
+      if (action.subtype === 'editor') {
+        return {
+          ...state,
+          url: action.link,
+          file: null,
+          uploaded: true
+        };
+      }
 
     case EDITOR_PAGE_UNLOADED:
       return {};

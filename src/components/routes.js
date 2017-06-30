@@ -23,20 +23,21 @@ class RoutesMap extends Component {
     if (this.props.redirectTo != null){
       this.props.onRedirect();
     }
-
-    componentWillMount() {
-        // Initialize Firebase
-      let config = {
-        apiKey: "AIzaSyBZkgZKVc0SFUyNvJ62VBvvUcJ-ti_Gyks",
-        authDomain: "picterest-44fd5.firebaseapp.com",
-        databaseURL: "https://picterest-44fd5.firebaseio.com",
-        projectId: "picterest-44fd5",
-        storageBucket: "gs://picterest-44fd5.appspot.com",
-        messagingSenderId: "391756120477"
-      };
-      firebase.initializeApp(config);
-    }
   }
+
+  componentWillMount() {
+      // Initialize Firebase
+    const config = {
+      apiKey: "AIzaSyBZkgZKVc0SFUyNvJ62VBvvUcJ-ti_Gyks",
+      authDomain: "picterest-44fd5.firebaseapp.com",
+      databaseURL: "https://picterest-44fd5.firebaseio.com",
+      projectId: "picterest-44fd5",
+      storageBucket: "gs://picterest-44fd5.appspot.com",
+      messagingSenderId: "391756120477"
+    };
+    firebase.initializeApp(config);
+  }
+  
   render() {
     let redirect = null;
     if (this.props.redirectTo) {

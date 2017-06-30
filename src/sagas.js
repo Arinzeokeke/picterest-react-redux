@@ -1,4 +1,6 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
+import firebase from 'firebase';
+import randomString from 'randomstring';
 import { Types, Creators } from './actions/actions';
 import agent from './agent.js'
 
@@ -7,7 +9,7 @@ function* requestLogin(action) {
   yield put(Creators.asyncStart(Types.LOGIN));
   const { email, password } = action.payload;
 
- try {
+  try {
     const { jwt } = yield call(agent.Auth.token, email, password);
     yield call(agent.setToken, jwt);
     yield put(Creators.setToken(jwt));
@@ -29,16 +31,35 @@ function* requestLogin(action) {
 
 function* requestRegister(action) {
   const { name, email, password } = action.payload;
+    const { file, url } = yield select(state => ({
+    ...state.auth
+  }));
 
   try {
 
-    const res = yield call(agent.Auth.register, name, email, password);
+    let url = url;
+    if (file) {
+      const randString = randomString.generate();
+      console.log(randString);
+      const metadata = {
+        contentType: file.type
+      };
+      const storageRef = firebase.storage().ref().child(`profiles/${randString}`);
+      const snapshot = yield call(storageRef.put, file, metadata);
+      url = snapshot.downloadURL;
+      yield put(Creators.fileUploaded, url, 'auth');
+    }
+    const res = yield call(agent.Auth.register, name, email, password, url);
     const token = yield call(agent.Auth.token, email, password);
     const output = { ...res.user, token: token.jwt };
     yield put(Creators.register(output, false));
   } catch (e) {
     console.log('ERROR', e);
-    yield put(Creators.register(e.response.body, true));
+    let errors = null;
+    if (e.code) {
+      errors = { errors: ['Image Upload went wrong']};
+    }
+    yield put(Creators.register(errors || e.response.body, true));
   }
 } 
 

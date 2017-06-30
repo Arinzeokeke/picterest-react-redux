@@ -21,6 +21,7 @@
     "masonry-layout": "^4.2.0",
     "prop-types": "^15.5.10",
     "query-string": "^4.3.4",
+    "randomstring": "^1.1.5",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.5.4",
