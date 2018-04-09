@@ -18,8 +18,16 @@ body {
   padding: 16px;
 }
 
+.card {
+  min-width: 40%
+}
+
 @media (max-width: 400px) {
   .flex-grid {
     display: block;
   }
+}
+
+.error-messages {
+  color: red;
 }

@@ -1,62 +1,42 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, 
-  Nav, 
-  NavItem, 
-  NavDropdown, 
-  MenuItem } from 'react-bootstrap';
-  import LoggedInView from './LoggedInView';
+import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
+import LoggedInView from './LoggedInView'
 
 const LoggedOutView = props => {
   return (
-  <Nav pullRight>
+    <Fragment>
+      <li>
+        <Link to="/login"> Login </Link>
+      </li>
+      <li>
+        <Link to="/register"> Register </Link>
+      </li>
+      <li>
+        <Link to="/"> Home </Link>
+      </li>
+    </Fragment>
+  )
+}
 
-    <NavItem eventKey={1} > 
-      <Link to='/login'> Login </Link>
-    </NavItem>
-    <NavItem eventKey={2} >
-    <Link to='/register'> Register </Link>
-    
-    </NavItem>
-    <NavItem eventKey={3} >
-    <Link to='/'> Home </Link>
-    
-    </NavItem>
-  </Nav>
-    );
-
-};
-
-
-const Header = ({appName, currentUser}) => {
-    const navbarInstance = (
-      <Navbar  collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <a href="#">{appName}</a>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-              <MenuItem eventKey={3.1}>Action</MenuItem>
-             <MenuItem divider />
-              <MenuItem eventKey={3.3}>Separated link</MenuItem>
-            </NavDropdown>
-          </Nav>
-          <Nav pullRight>
-            {currentUser ? <LoggedInView currentUser={currentUser}/> : <LoggedOutView />
-          }
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    );
-    return (
-      <div>
-      { navbarInstance }
+const Header = ({ appName, currentUser }) => {
+  const materialNav = (
+    <nav>
+      <div className="nav-wrapper">
+        <Link to="/" className="brand-logo">
+          {appName}
+        </Link>
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
+          {currentUser ? (
+            <LoggedInView currentUser={currentUser} />
+          ) : (
+            <LoggedOutView />
+          )}
+        </ul>
       </div>
-    );
-}; 
+    </nav>
+  )
+  return <div>{materialNav}</div>
+}
 
-export default Header;
+export default Header

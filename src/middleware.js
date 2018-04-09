@@ -1,13 +1,13 @@
-import agent from './agent';
-import { Types } from './actions/actions';
-const { ASYNC_START, REGISTER, LOGIN, LOGOUT, SET_TOKEN, APP_LOAD } = Types;
+import agent from './agent'
+import { Types } from './actions/actions'
+const { ASYNC_START, REGISTER, LOGIN, LOGOUT, SET_TOKEN, APP_LOAD } = Types
 
 const promiseMiddleware = store => next => action => {
   if (isPromise(action.payload)) {
-    store.dispatch({ type: ASYNC_START, subtype: action.type });
+    store.dispatch({ type: ASYNC_START, subtype: action.type })
 
-    const currentView = store.getState().viewChangeCounter;
-    const skipTracking = action.skipTracking;
+    const currentView = store.getState().viewChangeCounter
+    const skipTracking = action.skipTracking
 
     action.payload.then(
       res => {
@@ -16,56 +16,59 @@ const promiseMiddleware = store => next => action => {
         if (!skipTracking && currentState.viewChangeCounter !== currentView) {
           return
         }
-        action.payload = res;
-        console.log('RESULT', res);
+        action.payload = res
+        console.log('RESULT', res)
         //store.dispatch({ type: ASYNC_END, promise: action.payload });
-        store.dispatch(action);
+        store.dispatch(action)
       },
       error => {
-        const currentState = store.getState();
+        const currentState = store.getState()
         if (!skipTracking && currentState.viewChangeCounter !== currentView) {
           return
         }
-        console.log('ERROR', error);
-        action.error = true;
-        action.payload = error.response.body;
+        console.log('ERROR', error)
+        action.error = true
+        action.payload = error.response.body
 
         if (!action.skipTracking) {
           //store.dispatch({ type: ASYNC_END, promise: action.payload });
         }
         if (action.type === APP_LOAD) {
-          window.localStorage.setItem('jwt', '');
+          window.localStorage.setItem('jwt', '')
         }
-        store.dispatch(action);
+        store.dispatch(action)
       }
-    );
+    )
 
-    return;
+    return
   }
 
-  next(action);
-};
+  next(action)
+}
 
 const localStorageMiddleware = store => next => action => {
-  if (action.type === REGISTER || action.type === LOGIN || action.type === SET_TOKEN ) {
+  if (
+    action.type === REGISTER ||
+    action.type === LOGIN ||
+    action.type === SET_TOKEN
+  ) {
     //console.log(action.type);
     if (!action.error) {
-      window.localStorage.setItem('jwt', action.token || action.payload.token);
-      agent.setToken(action.token || action.payload.token );
+      window.localStorage.setItem('jwt', action.token || action.payload.token)
+      agent.setToken(action.token || action.payload.token)
       // console.log('action', action);
       // console.log("HERE", window.localStorage.getItem('jwt'));
     }
   } else if (action.type === LOGOUT) {
-    window.localStorage.setItem('jwt', '');
-    agent.setToken(null);
+    window.localStorage.setItem('jwt', '')
+    agent.setToken(null)
   }
 
-  next(action);
-};
-
-function isPromise(v) {
-  return v && typeof v.then === 'function';
+  next(action)
 }
 
+function isPromise(v) {
+  return v && typeof v.then === 'function'
+}
 
 export { promiseMiddleware, localStorageMiddleware }

@@ -1,12 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import { Provider } from 'react-redux';
-import configureStore from './store';
-import registerServiceWorker from './registerServiceWorker';
-import RoutesMap from './components/routes';
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from 'react-redux'
+import configureStore from './store'
+// import registerServiceWorker from './registerServiceWorker';
+import RoutesMap from './components/routes'
+import './index.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'materialize-css/dist/css/materialize.min.css'
 
 // const defaultState = {
 // 	postsInfo: {
@@ -15,13 +16,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //      postsError: false
 // 	}
 // }
-        
-const store = configureStore();
 
-ReactDOM.render((
-  <Provider store = {store}>
-   <RoutesMap />
-</Provider>
+const store = configureStore()
+
+ReactDOM.render(
+  <Provider store={store}>
+    <RoutesMap />
+  </Provider>,
+  document.getElementById('root')
 )
-	, document.getElementById('root'));
-registerServiceWorker();
+// registerServiceWorker()
